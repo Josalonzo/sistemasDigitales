@@ -1,0 +1,31 @@
+
+#include <stdint.h>
+
+//PERIPHERAL & BUS BASE ADDRESS
+#define PERIPHERAL_BASE_ADDRESS  0x40000000U
+#define AHB_BASE_ADDRESS   (PERIPHERAL_BASE_ADDRESS + 0x00020000U
+
+//RCC BASE ADDRESS
+#define RCC_BASE_ADDRESS   (AHB_BASE_ADDRESS + 0x00001000U)
+#define RCC_IOPENR_ADDRESS   (RCC_BASE_ADDRESS + 0X0000002CU)
+
+//IOPORT BASE ADDRESS
+#define IOPORT_ADDRESS    (PERIPHERAL_BASE_ADDRESS + 0x10000000U)
+//GPIO BASE & SPECIFIC ADDRESS
+#define GPIOA_BASE_ADDRESS    (IOPORT_ADDRESS + 0x00000000U)
+#define GPIOA_MODER_REG    (GPIOA_BASE_ADDRESS + 0x00000000U)
+#define GPIOA_ODR_REG    (GPIOA_BASE_ADDRESS + 0x00000014U)
+
+int main(void)
+{
+    uint32_t *ptr_rcc_iopenr = RCC_IOPENR_ADDRESS;
+    uint32_t *ptr_gpioa_moder = GPIOA_MODER_REG;
+    uint32_t *ptr_gpioa_ord = GPIOA_ODR_REG;
+
+    *ptr_rcc_iopenr |= 1<<0;
+    *ptr_gpioa_moder &= ~(1<<11);
+    *ptr_gpioa_ord |= 1<<5;
+
+    for(;;);
+
+}
