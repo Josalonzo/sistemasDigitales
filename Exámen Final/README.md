@@ -7,7 +7,7 @@ Universidad del Istmo (FING) — 2026
 
 ## Descripción
 
-Cerradura electrónica desarrollada en bare metal para el STM32L053R8 (Nucleo-64). Permite el control de acceso mediante PIN por teclado y apertura remota vía WiFi desde el navegador del celular.
+Cerradura electrónica desarrollada para el STM32L053R8. Permite el control de acceso mediante PIN por teclado y apertura remota vía WiFi desde el navegador del celular.
 
 ## Características
 
