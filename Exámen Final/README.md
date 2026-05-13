@@ -40,13 +40,13 @@ Cerradura electrónica desarrollada para el **STM32L053R8** en bare metal (sin H
 
 ### Vista Lateral 1 — LEDs indicadores
 
-![Side 1](Demo/Side2.HEIC)
+![Side 1](Demo/side2.HEIC)
 
 > Vista lateral izquierda del prototipo encendido. Se pueden apreciar claramente el LED verde y el LED rojo indicadores de estado (acceso concedido y denegado respectivamente) y el sistema de iluminación interna de la caja acrílica.
 
 ### Vista Lateral 2 — Componentes principales
 
-![Side 2](Demo/Side3.HEIC)
+![Side 2](Demo/side3.HEIC)
 
 > Vista lateral derecha donde se distinguen el buzzer (cilindro azul), el keypad matricial 4x4 y los componentes en breadboard. El ESP32 NodeMCU se encuentra en la parte inferior izquierda conectado al STM32 vía UART.
 
