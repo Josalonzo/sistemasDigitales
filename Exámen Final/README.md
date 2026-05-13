@@ -32,7 +32,7 @@ Cerradura electrónica desarrollada para el **STM32L053R8** en bare metal (sin H
 
 ## Fotografías del Prototipo
 
-### Vista General — Interior del prototipo acrílico
+### Vista General — Prototipo acrílico
 
 ![Vista general](Demo/front.HEIC)
 
@@ -46,13 +46,13 @@ Cerradura electrónica desarrollada para el **STM32L053R8** en bare metal (sin H
 
 ### Vista Lateral 2 — Componentes principales
 
-![Side 2](Demo/side3.HEIC)
+![Side 2](Demo/Side3.HEIC)
 
 > Vista lateral derecha donde se distinguen el buzzer (cilindro azul), el keypad matricial 4x4 y los componentes en breadboard. El ESP32 NodeMCU se encuentra en la parte inferior izquierda conectado al STM32 vía UART.
 
 ### Vista Frontal — Mecanismo de apertura
 
-![Frontal](Demo/side1.HEIC)
+![Frontal](Demo/Side1.HEIC)
 
 > Vista frontal del prototipo. Se aprecia el servo SG90 asomando por la parte delantera de la caja acrílica, actuando como mecanismo de cerrojo. El cable USB conectado al STM32 Nucleo-64 proporciona alimentación al sistema.
 
