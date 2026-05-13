@@ -1,13 +1,62 @@
-# Cerradura Electrónica — STM32L053R8
+<div align="center">
+  <img src="Demo/fotos/logoUNIS.png" alt="Logo UNIS" width="180"/>
+  <h1>Cerradura Electrónica — STM32L053R8</h1>
+  <p><em>Universidad del Istmo · Facultad de Ingeniería</em></p>
+  <p><em>Ingeniería en Electrónica y Telecomunicaciones · 5to Año</em></p>
+  <p><em>José Alonzo · Examen Final Sistemas Digitales · 2026</em></p>
+</div>
 
-**Exámen Final Sistemas Digitales — José Alonzo**  
-Universidad del Istmo (FING) — 2026
+---
+
+## Tabla de Contenido
+
+- [Descripción](#descripción)
+- [Fotografías del Prototipo](#fotografías-del-prototipo)
+- [Características](#características)
+- [Hardware](#hardware)
+- [Mapa de Pines](#mapa-de-pines)
+- [Arquitectura de Software](#arquitectura-de-software)
+- [Control WiFi](#control-wifi)
+- [Configuración](#configuración)
+- [Estructura del Repositorio](#estructura-del-repositorio)
+- [Herramientas](#herramientas)
+- [Autor](#autor)
 
 ---
 
 ## Descripción
 
-Cerradura electrónica desarrollada para el STM32L053R8. Permite el control de acceso mediante PIN por teclado y apertura remota vía WiFi desde el navegador del celular.
+Cerradura electrónica desarrollada para el **STM32L053R8** en bare metal (sin HAL). Permite el control de acceso mediante PIN ingresado por teclado matricial 4x4, con retroalimentación visual en LCD 16x2 y apertura remota vía WiFi desde el navegador del celular. El prototipo está montado en una **caja acrílica transparente** que contiene toda la circuitería y el mecanismo de apertura basado en un servo SG90.
+
+---
+
+## Fotografías del Prototipo
+
+### Vista General — Interior del prototipo acrílico
+
+![Vista general](Demo/fotos/top.HEIC)
+
+> Vista superior del prototipo: se aprecia el keypad 4x4 en la esquina superior derecha, la LCD azul al centro, los LEDs indicadores (verde = acceso concedido, rojo = acceso denegado), el servo SG90 como mecanismo de apertura y el STM32 Nucleo-64 en la base, todo contenido dentro de la caja acrílica transparente.
+
+### Vista Lateral 1 — LEDs indicadores
+
+![Side 1](Demo/fotos/Side1.HEIC)
+
+> Vista lateral izquierda del prototipo encendido. Se pueden apreciar claramente el LED verde y el LED rojo indicadores de estado (acceso concedido y denegado respectivamente) y el sistema de iluminación interna de la caja acrílica.
+
+### Vista Lateral 2 — Componentes principales
+
+![Side 2](Demo/fotos/side2.HEIC)
+
+> Vista lateral derecha donde se distinguen el buzzer (cilindro azul), el keypad matricial 4x4 y los componentes en breadboard. El ESP32 NodeMCU se encuentra en la parte inferior izquierda conectado al STM32 vía UART.
+
+### Vista Frontal — Mecanismo de apertura
+
+![Frontal](Demo/fotos/front.HEIC)
+
+> Vista frontal del prototipo. Se aprecia el servo SG90 asomando por la parte delantera de la caja acrílica, actuando como mecanismo de cerrojo. El cable USB conectado al STM32 Nucleo-64 proporciona alimentación al sistema.
+
+---
 
 ## Características
 
@@ -19,46 +68,6 @@ Cerradura electrónica desarrollada para el STM32L053R8. Permite el control de a
 - Buzzer con feedback sonoro
 - Bloqueo automático tras 3 intentos fallidos (30 segundos)
 - Cierre automático tras 5 segundos de apertura
-
----
-
-## Estructura del repositorio
-
-```
-Exámen Final/
-│
-├── README.md                  — Este archivo
-│
-├── STM32/                     — Proyecto STM32CubeIDE (bare metal)
-│   ├── Inc/
-│   │   ├── buzzer.h           — Interface del módulo buzzer (PC3)
-│   │   ├── keypad.h           — Interface del teclado matricial 4x4
-│   │   ├── lcd.h              — Interface del driver LCD HD44780
-│   │   ├── led.h              — Interface de LEDs indicadores
-│   │   ├── lock.h             — Interface de lógica principal
-│   │   ├── servo.h            — Interface del servo SG90
-│   │   └── wifi.h             — Interface de comunicación UART
-│   ├── Src/
-│   │   ├── main.c             — Punto de entrada, timers e interrupciones
-│   │   ├── buzzer.c           — Beeps y tono de alarma (TIM22)
-│   │   ├── keypad.c           — Escaneo matricial con debounce (TIM21)
-│   │   ├── lcd.c              — Driver LCD modo 4 bits no bloqueante
-│   │   ├── led.c              — LEDs verde (PC4) y rojo (PC5)
-│   │   ├── lock.c             — Máquina de estados de la cerradura
-│   │   ├── servo.c            — PWM 50Hz para SG90 (TIM2 CH1)
-│   │   ├── wifi.c             — Recepción UART desde ESP32 (USART1)
-│   │   ├── syscalls.c         — Syscalls mínimas para newlib
-│   │   └── sysmem.c           — Gestión de heap
-│   └── Startup/
-│       └── startup_stm32l053r8tx.s
-│
-├── ESP32/                     — Código del módulo WiFi
-│   └── cerradura_esp32.cpp    — Servidor web + comunicación UART al STM32
-│
-└── Demo/                      — Evidencia del funcionamiento
-    ├── fotos/                 — Fotografías del circuito armado
-    └── videos/                — Video de demostración del proyecto
-```
 
 ---
 
@@ -77,7 +86,7 @@ Exámen Final/
 
 ---
 
-## Mapa de pines
+## Mapa de Pines
 
 ### LCD HD44780 (modo 4 bits)
 | Pin LCD | Pin STM32 |
@@ -114,7 +123,7 @@ Exámen Final/
 
 ---
 
-## Arquitectura de software
+## Arquitectura de Software
 
 ```
 main.c
@@ -127,7 +136,7 @@ main.c
 └── lock.c      — Lógica principal: PIN, estados, timeouts
 ```
 
-### Mapa de interrupciones
+### Mapa de Interrupciones
 
 | Interrupción | Frecuencia | Función |
 |---|---|---|
@@ -136,7 +145,7 @@ main.c
 | TIM22 | 0.5ms | Buzzer + LCD no bloqueante |
 | USART1 | Por byte | Recepción comandos ESP32 |
 
-### Máquina de estados
+### Máquina de Estados
 
 ```
 IDLE ──(PIN correcto)──────────> OPEN ──(5s timeout)──> IDLE
@@ -148,7 +157,7 @@ IDLE ──(PIN correcto)──────────> OPEN ──(5s timeout)
 
 ## Control WiFi
 
-El ESP32 NodeMCU actúa como servidor web. Al conectarse a la misma red WiFi, abrís la IP en el navegador y aparece una interfaz con botones para abrir y cerrar.
+El ESP32 NodeMCU actúa como servidor web. Al conectarse a la misma red WiFi, se abre la IP en el navegador y aparece una interfaz con botones para abrir y cerrar.
 
 ### Protocolo UART (ESP32 → STM32)
 ```
@@ -157,10 +166,10 @@ El ESP32 NodeMCU actúa como servidor web. Al conectarse a la misma red WiFi, ab
 ```
 
 ### Pasos para usar
-1. Conectar el cel a la misma red WiFi que el ESP32
+1. Conectar el celular a la misma red WiFi que el ESP32
 2. Ver la IP en el monitor serial (115200 baud)
 3. Abrir `http://<IP>` en el navegador
-4. Presionar el botón Abrir o Cerrar
+4. Presionar el botón **Abrir** o **Cerrar**
 
 ---
 
@@ -181,10 +190,57 @@ En `servo.h`, modificar los valores de CCR1:
 
 ---
 
+## Estructura del Repositorio
+
+```
+Examen Final/
+│
+├── README.md                  — Este archivo
+│
+├── STM32/                     — Proyecto STM32CubeIDE (bare metal)
+│   ├── Inc/
+│   │   ├── buzzer.h           — Interface del módulo buzzer (PC3)
+│   │   ├── keypad.h           — Interface del teclado matricial 4x4
+│   │   ├── lcd.h              — Interface del driver LCD HD44780
+│   │   ├── led.h              — Interface de LEDs indicadores
+│   │   ├── lock.h             — Interface de lógica principal
+│   │   ├── servo.h            — Interface del servo SG90
+│   │   └── wifi.h             — Interface de comunicación UART
+│   ├── Src/
+│   │   ├── main.c             — Punto de entrada, timers e interrupciones
+│   │   ├── buzzer.c           — Beeps y tono de alarma (TIM22)
+│   │   ├── keypad.c           — Escaneo matricial con debounce (TIM21)
+│   │   ├── lcd.c              — Driver LCD modo 4 bits no bloqueante
+│   │   ├── led.c              — LEDs verde (PC4) y rojo (PC5)
+│   │   ├── lock.c             — Máquina de estados de la cerradura
+│   │   ├── servo.c            — PWM 50Hz para SG90 (TIM2 CH1)
+│   │   ├── wifi.c             — Recepción UART desde ESP32 (USART1)
+│   │   ├── syscalls.c         — Syscalls mínimas para newlib
+│   │   └── sysmem.c           — Gestión de heap
+│   └── Startup/
+│       └── startup_stm32l053r8tx.s
+│
+├── ESP32/                     — Código del módulo WiFi
+│   └── cerradura_esp32.cpp    — Servidor web + comunicación UART al STM32
+│
+└── Demo/                      — Evidencia del funcionamiento
+    ├── fotos/                 — Fotografías del circuito armado
+    │   ├── logoUNIS.png       — Logo de la Universidad del Istmo
+    │   ├── top.HEIC           — Vista general del prototipo
+    │   ├── Side1.HEIC         — Vista lateral 1 (LEDs indicadores)
+    │   ├── side2.HEIC         — Vista lateral 2 (keypad y buzzer)
+    │   ├── front.HEIC         — Vista frontal (servo / mecanismo)
+    │   └── side3.HEIC         — Vista lateral 3
+    └── videos/                — Video de demostración del proyecto
+```
+
+---
+
 ## Herramientas
 
-- **STM32CubeIDE** — programación del STM32 (bare metal, sin HAL)
-- **STM32L053R8** — microcontrolador Cortex-M0+, 16MHz HSI
+- **STM32CubeIDE** — Programación del STM32 (bare metal, sin HAL)
+- **STM32L053R8** — Microcontrolador Cortex-M0+, 16MHz HSI
+- **Arduino IDE / PlatformIO** — Programación del ESP32
 
 ---
 
@@ -192,4 +248,5 @@ En `servo.h`, modificar los valores de CCR1:
 
 **José Alonzo**  
 Universidad del Istmo — UNIS/FING  
-Exámen Final Sistemas Digitales — 2026
+Ingeniería en Electrónica y Telecomunicaciones · 5to Año  
+Examen Final Sistemas Digitales — 2026
