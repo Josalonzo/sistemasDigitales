@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="Demo/fotos/logoUNIS.png" alt="Logo UNIS" width="180"/>
+  <img src="Demo/logoUNIS.png" alt="Logo UNIS" width="180"/>
   <h1>Cerradura Electrónica — STM32L053R8</h1>
   <p><em>Universidad del Istmo · Facultad de Ingeniería</em></p>
   <p><em>Ingeniería en Electrónica y Telecomunicaciones · 5to Año</em></p>
@@ -34,25 +34,25 @@ Cerradura electrónica desarrollada para el **STM32L053R8** en bare metal (sin H
 
 ### Vista General — Interior del prototipo acrílico
 
-![Vista general](Demo/fotos/top.HEIC)
+![Vista general](Demo/top.HEIC)
 
 > Vista superior del prototipo: se aprecia el keypad 4x4 en la esquina superior derecha, la LCD azul al centro, los LEDs indicadores (verde = acceso concedido, rojo = acceso denegado), el servo SG90 como mecanismo de apertura y el STM32 Nucleo-64 en la base, todo contenido dentro de la caja acrílica transparente.
 
 ### Vista Lateral 1 — LEDs indicadores
 
-![Side 1](Demo/fotos/Side1.HEIC)
+![Side 1](Demo/Side1.HEIC)
 
 > Vista lateral izquierda del prototipo encendido. Se pueden apreciar claramente el LED verde y el LED rojo indicadores de estado (acceso concedido y denegado respectivamente) y el sistema de iluminación interna de la caja acrílica.
 
 ### Vista Lateral 2 — Componentes principales
 
-![Side 2](Demo/fotos/side2.HEIC)
+![Side 2](Demo/side2.HEIC)
 
 > Vista lateral derecha donde se distinguen el buzzer (cilindro azul), el keypad matricial 4x4 y los componentes en breadboard. El ESP32 NodeMCU se encuentra en la parte inferior izquierda conectado al STM32 vía UART.
 
 ### Vista Frontal — Mecanismo de apertura
 
-![Frontal](Demo/fotos/front.HEIC)
+![Frontal](Demo/front.HEIC)
 
 > Vista frontal del prototipo. Se aprecia el servo SG90 asomando por la parte delantera de la caja acrílica, actuando como mecanismo de cerrojo. El cable USB conectado al STM32 Nucleo-64 proporciona alimentación al sistema.
 
